@@ -64,6 +64,3 @@ WHERE
     e.mgr=s.empno
     AND e.deptno=dept.deptno
     AND e.sal BETWEEN losal AND hisal;
-
-
--- 위 문제들을 ANSI JOIN을 사용한 질의 명령으로 바꿔보자!

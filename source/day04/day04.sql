@@ -439,14 +439,17 @@ SELECT
 FROM
     emp
 WHERE
+/*
     job IN (
         SELECT
             job
         FROM
             emp
         WHERE
-            deptno=10
-    )
+            deptno=10       이렇게 하면 10번 부서에 존재하는 직급의
+    )                       (부서 불문) 직급 평균들이 계산된다.
+*/
+    deptno=10
 GROUP BY
     job
 ;
@@ -567,3 +570,17 @@ WHERE
             emp
     )
 ;
+
+/*
+    <day05에서 보충>
+    IN과 ANY의 차이
+    
+        NO IN (10, 20, 30) 의 의미는
+        NO =(10, 20, 30) 과 같지만
+        
+        NO 대소비교연산자 ANY (10, 20, 30)
+        은 대소비교연산자 그대로의 의미는 아니다.
+        
+        true값 기준으로 봤을 때,
+        ALL이 ANY의 확장형, 반대로 ANY는 ALL의 축소형이라고 보면 될듯.
+*/
