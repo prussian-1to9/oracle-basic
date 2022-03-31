@@ -185,6 +185,15 @@ FROM
     emp
 GROUP BY
     SUBSTR(hiredate, 0,2);
+
+-- 다르게도 풀어보자!
+SELECT
+    TO_CHAR(hiredate, 'YY')||' 년도' "입사년도",
+    COUNT(*) "입사 사원 수"
+FROM
+    emp
+GROUP BY
+    TO_CHAR(hiredate, 'YY');
 /*
 문제 5.
     이름 글자수를 기준으로 그룹화 하여 조회하려고 한다.
