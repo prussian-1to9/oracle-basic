@@ -156,7 +156,7 @@ rollback; --> 되돌리기
 UPDATE
     emp2
 SET
-    job='visual'
+    job='VISUAL'
 WHERE
     ename='jaemin';
     
