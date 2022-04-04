@@ -577,7 +577,7 @@ SET
     deptno=40
 WHERE
     ename='KING'        -- check option에 걸린다고 오류가 뜨죵.
-;
+;                       -- 원본 테이블(employee)에선 작업이 가능!
 
 /*
     + 기본 테이블이 없어도 view를 만들 수 있다! (급할 때 임시방편)
@@ -604,3 +604,9 @@ AS
 
 -- 삭제합쉬다.
 DROP VIEW brdlist;
+
+
+
+
+
+
