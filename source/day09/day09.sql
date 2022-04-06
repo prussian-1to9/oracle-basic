@@ -308,4 +308,71 @@ FOR tview
 
 -- public 권한 부여
 GRANT SELECT ON tmp TO PUBLIC;
+select * from user_properties;
+--------------------------------------------------------------------------------
+/*
+    자습시간
+    질문 1
+    계정-테이블로 들어갔을때 정렬은 무슨 기준일까? : index 기준
+    데이터 입력할 때 index가 새롭게 만들어진다.
+    
+    질문 2
+    만들어진 권한 조회방법
+    (dba_sys로 시작하는건 system 계정, user_로 시작하는건 개인 계정으로 조회한다.)
+*/
+-- 1. 계정 권한 : 롤은 꺼내지지 않는다.
+SELECT
+    grantee, privilege, admin_option
+FROM
+    dba_sys_privs
+WHERE
+    grantee='EZ'    -- 사용자 명은 대문자로 써야 함!
+;
+-- 무슨 칼럼들이 있는지 보자 궁금함
+DESC dba_sys_privs;
 
+
+-- 2. 객체 권한
+SELECT
+    *
+FROM
+    user_tab_privs
+;
+DESC user_tab_privs;
+
+-- 3. 롤 권한
+SELECT
+    *
+FROM
+    user_role_privs
+;
+DESC user_role_privs;
+
+-- 2+3. 계정 일반권한 + 롤권한 한눈에 보기
+SELECT
+    grantee, privilege
+FROM
+    dba_sys_privs
+WHERE
+    grantee='USERROLE01'
+UNION   -- 두 테이블의 칼럼 이름이 다르고, 타입은 같기 때문에 union 처리
+SELECT
+    grantee, granted_role
+FROM
+    dba_role_privs
+WHERE
+    grantee='USERROLE01'
+ORDER BY
+    grantee ASC
+;
+
+-- 롤 안에 부여된 모든 권한 확인
+SELECT
+    grantee, privilege
+FROM
+    dba_sys_privs
+WHERE
+    grantee IN ('USERROLE01', 'CONNECT', 'RESOURCE')
+ORDER BY
+    grantee ASC
+;
