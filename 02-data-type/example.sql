@@ -1,28 +1,34 @@
-/* ========================= [ 기본 select ] ========================= */
--- 부서 정보 테이블(dept)에서 정보 조회
-SELECT deptno, dnmae, loc
-FROM dept;
-
--- 1+4의 결과 조회
-SELECT 1 + 4;
-SELECT 1 + 4 from dual; -- dual은 오라클에서 제공하는 가상 테이블, 타 DB에서는 사용 불가
-SELECT 1 + 4 from emp; -- 테이블의 row만큼 결과값인 5가 출력
-
--- 사원 정보 테이블(emp)에서 임의의 이름 출력
-SELECT '최이지' FROM emp; -- 마찬가지로 테이블의 row만큼 결과값인 '최이지'가 출력
-
 /* ========================= [ 단순 연산자 ] ========================= */
 SELECT ename 이름, sal 원급여, sal + 10000 "보너스 적용 급여",
     sal * 1.5 "인상 급여", sal * 12 연봉
 FROM emp;
 
+-- 사원들의 이름, 급여, 10% 인상된 급여 조회
+SELECT ename as "사원 이름", sal AS 원급여, sal*1.1 "인상 급여"
+FROM emp;
+
+
 /* ========================= [ 결합 연산자 || ] ========================= */
 SELECT 10 || 20 FROM dual; -- 1020
 
 -- 사원들 이름에 Mr. 를 붙여 조회
-SELECT
-    'Mr.' || ename "사원 이름", sal || '$' 급여, hiredate 입사일
+SELECT 'Mr.' || ename "사원 이름", sal || '$' 급여, hiredate 입사일
 FROM emp;
+
+/*
+    사원들의 사번과 사원 이름 조회
+    (단, 한 column에 사원번호 - 사원이름 형식으로 조회)
+*/
+SELECT empno || ' - ' || ename 사원
+FROM emp;
+
+/*
+    사원들의 사원번호, 사원 이름 조회
+    (단, 사원번호는 '{empno}번', 사원이름은 '{ename}님'의 형식으로 조회)
+*/
+SELECT empno || '번' 사번, ename || '님' "사원 이름"
+FROM emp;
+
 
 /* ========================= [ 단순 조건 연산자 ] ========================= */
 /*
@@ -102,6 +108,7 @@ WHERE -- 아래의 조건 모두 다 같은 조건임
     OR deptno != 10;
     OR deptno <> 10;
 
+
 /* ========================= [ 조건 연산자 : IN , BETWEEN, LIKE... ] ========================= */
 /*
     부서 번호가 10번 또는 30번인 사원의
@@ -123,13 +130,3 @@ SELECT ename, hiredate
 FROM emp
 WHERE hiredate LIKE '__/01/__';
     --TO_CHAR(hiredate, 'YY/MM/DD') LIKE '__/01/__';  -- 가 사실 정확하다.
-
-/* ========================= [ 이후 토픽 맛보기 ] ========================= */
-SELECT e.ename "사원 이름", e.sal 급여, e.mgr "상사 번호",
-    s.ename "상사 이름", s.sal "상사 급여"
-FROM emp e, emp s
-WHERE e.mgr = s.empno(+);
-
-SELECT ename "사원 이름", sal 급여, grade "급여 등급"
-FROM emp, salgrade
-WHERE sal BETWEEN losal AND hisal;
