@@ -150,7 +150,7 @@ SELECT initcap('hello world!') from dual; -- Hello World! 출력
 
   ```sql
   ABS(데이터 | col_name | 연산식)
-  -- 이하의 '데이터'는 특정 값, 필드 이름, 연산식을 일괄 포함함
+  -- 이하의 '데이터'는 특정 값, 필드 이름, 연산식을 포괄함
   ROUND(데이터[, 자릿수])
   FLOOR(데이터)
   TRUNC(데이터[, 자릿수])
