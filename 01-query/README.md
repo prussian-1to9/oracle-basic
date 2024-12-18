@@ -94,7 +94,7 @@
   | logical name | physical name |
   |:-:|:-:|
   | empno | 사원 번호 |
-  | enmae | 사원 이름 |
+  | ename | 사원 이름 |
   | job | 사원 직급 |
   | mgr | 상사 번호 |
   | hiredate | 입사일 |

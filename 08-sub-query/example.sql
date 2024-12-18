@@ -64,12 +64,17 @@ SELECT ename "사원 이름", deptno "부서 번호"
 FROM /* scott.*/emp
     /*
         테이블을 가리킬 때는
-            database_name.tbl_name
+            user_name.tbl_name
 
         으로 기재하는 것이 FM이나,
-        현재 접속 DB에 한해서는 테이블 명만 기재해도 구동된다.
+        현재 계정(또는 접속 DB)에 한해서는 테이블 명만 기재해도 구동된다.
 
-        동일 계정 내에서 잠시 타 DB의 테이블을 이용할때 유용한 구문.
+        현재 계정(또는 접속 DB)을 유지한 채
+        잠시 타 계정(또는 접속 DB)의 테이블을 이용할때 유용한 구문.
+
+        oracle의 경우 스키마(schema)가 <계정에 귀속>되어 계정 명을 기재했지만
+        mySQL 등 타 DB에서는 스키마가 <database에 귀속>된다.
+            이 경우 계정명 대신 DB명을 기재하면 똑같이 구동된다.
     */
 WHERE /* NOT 자리 */ EXISTS (
     SELECT ename, sal, deptno FROM emp
