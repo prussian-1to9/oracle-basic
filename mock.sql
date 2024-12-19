@@ -1,5 +1,6 @@
 CREATE TABLE dept(
-    deptno  NUMBER(10),
+    deptno  NUMBER(10)
+        CONSTRAINT DEPT_PK PRIMARY KEY,
     dname   VARCHAR2(14),
     loc     VARCHAR2(13) 
 );
@@ -14,12 +15,11 @@ CREATE TABLE emp (
     empno               NUMBER(4) NOT NULL,
     ename               VARCHAR2(10),
     job                 VARCHAR2(9),
-    mgr                 NUMBER(4) ,
+    mgr                 NUMBER(4),
     hiredate            DATE,
     sal                 NUMBER(7,2),
     comm                NUMBER(7,2),
     deptno              NUMBER(2)
-        CONSTRAINT EMP_DEPT_FK REFERENCES DEPT(DEPTNO)
 );
 
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES
