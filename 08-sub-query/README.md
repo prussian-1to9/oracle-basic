@@ -43,6 +43,30 @@
 
 - `ANY`를 이용해 동등 비교 연산(`=`) 할 경우 **`IN`과 같은 기능**을 함
 
+### SELECT 절에서의 inline view
+
+- `SELECT` 명령을 내리면 발생하는 결과를 inline view라고 한다.
+- `12-tcl-view` 토픽에서 다루는 뷰(view)가 **자주 사용하는 inline view를 DB 객체로** 등록한 것이라고 이해하면 쉽다.
+- 이는 **실제 존재하지 않는 데이터**를 임의로 추가해서 **사용할 때 유용**하다.
+
+```sql
+-- inline view의 컬럼(field) 사용
+SELECT empno, ename
+FROM (SELECT * FROM emp);
+
+-- inline view 내에 존재하지 않는 컬럼 이름은 사용할 수 없음
+SELECT empno, ename, hiredate
+FROM (SELECT empno, ename FROM emp);
+```
+
+- 2번째 쿼리에서 `hiredate`는 `emp` 테이블에 존재하는 필드(column)임에도, `SELECT` 대상인 **inline view엔 `empno`와 `ename` 뿐**이기 때문에 에러가 발생하며 접근할 수 없게 된다.
+
+> #### `ROWNUM`
+>
+> - inline view와 함께 많이 쓰이는 oracle 내장 **가상의 필드**(column).
+> - 데이터가 조회된 순서(**행 번호**)를 표시한다.
+> - `ROWNUM`은 **`ORDER BY`보다 이전에 실행**되기 때문에, **정렬 이후 `ROWNUM` 값**을 활용하고 싶을 때엔 **inline view와 함께 사용**해야 한다.
+
 ---
 
 ## 계층형 질의(hierarchical query)

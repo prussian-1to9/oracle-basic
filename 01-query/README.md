@@ -54,12 +54,13 @@
 
 ### TCL(Transaction Control Language)
 
-- **트랜잭션을 제어**하는 명령
+- DB의 명령 단위인 **트랜잭션을 제어**하는 명령
   | TCL 명령 | 의미 |
   |:-:|:-:|
   | `COMMIT` | 모든 작업 정상 **반영** |
   | `ROLLBACK` | 모든 작업 **복구** |
-  | `SAVEPOINT` | commit 이전 **특정 시점까지 반영 또는 복구** |
+  | `SAVEPOINT` | `COMMIT` 이전 **특정 시점까지 반영 또는 복구** |
+  - 교재, 강의 마다 TCL과 DCL을 분리하기도, TCL을 DCL의 하위 개념으로 보거나 통합해서 보기도 한다.
 
 #### 트랜잭션(transaction) 관리
 

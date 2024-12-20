@@ -104,6 +104,61 @@ SELECT ename "사원 이름", job 직급, hiredate 입사일, sal 급여
 FROM emp
 WHERE sal <  (SELECT ROUND(avg(sal)) FROM emp);
 
+/* ========================= [ ROWNUM ] ========================= */
+/*
+    10번 부서에 속한 사원들의
+    사원 이름, 직급, 급여, 부서 번호 조회
+    이 때, 행 번호도 함께 조회
+
+    (단, 사원 번호 내림차순 정렬)
+*/
+SELECT * FROM (
+    SELECT ROWNUM rno, a.*
+    FROM (
+        SELECT empno, ename, job, sal, deptno
+        FROM emp
+        WHERE deptno = 10
+        ORDER BY empno DESC
+    ) a
+);
+
+-- 위 쿼리에서 2 ~ 4번째 행만 추출하는 경우
+SELECT ROWNUM rno, a.*
+FROM (
+    SELECT empno, ename, job, sal, deptno
+    FROM emp
+    WHERE deptno = 10
+    ORDER BY empno DESC
+) a
+WHERE rno BETWEEN 2 AND 4;
+
+/*
+    ROWNUM rno, WHERE rno BETWEEN 2 AND 4 가 inline view 안에 있다면?
+    *쿼리 순서대로 설명
+
+    1. FROM     - emp 테이블을 대상으로 하며 <<ROWNUM 부여>>
+    2. WHERE    - 부서 번호 10인 사원, 1번 기준의 2~4번째 행만 추출
+    3. SELECT   - ROWNUM, empno, ename, job, sal, deptno 조회
+
+    때문에 엉뚱한 결과가 나올 가능성이 매우 높다.
+*/
+/*
+    사원들의 사번, 사원 이름, 급여, 직급, 커미션,
+    부서 번호, 부서 이름, 부서 위치 조회
+    이 때, 행 번호도 함께 조회
+
+    (단, 이름 내림차순 기준 4 ~ 6번째 행만 조회)
+*/
+SELECT ROWNUM rno, a.*
+FROM (
+    SELECT empno, ename, sal, job, comm,
+        e.deptno, dname, loc
+    FROM emp e
+        JOIN dept d ON e.deptno = d.deptno
+    ORDER BY ename DESC
+) a
+WHERE rno BETWEEN 4 AND 6;
+
 /* ========================= [ 계층 질의 ] ========================= */
 SELECT empno, ename, job, mgr, LEVEL, hiredate
 FROM emp -- target table

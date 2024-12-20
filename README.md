@@ -13,6 +13,7 @@
 
 - `mock.sql` : 실습 시 사용할 `emp`, `dept` 테이블을 생성하고, 기본 데이터를 입력하는 SQL 스크립트입니다.
 - 수식에서의 모든 `[]`는 선택값, `{}` 기호 및 미기재는 필수값을 의미합니다.
+- 사용자의 임의 설정 값은 `소문자`, SQL의 구문적인 요소는 `대문자`로 기재합니다.
 
 ## 목차
 
@@ -23,11 +24,12 @@
 - **05-function2** : 데이터 **형변환** 함수, **날짜** 관련 함수, **null handling**, **조건** 처리 함수
 - **06-group-by** : `GROUP BY`, `HAVING` 절 소개, **그룹함수**
 - **07-join** : **`JOIN` 소개**, natural join, using join, **ANSI JOIN**
-- **08-sub-query** : **서브 쿼리 소개**, **계층형 질의**(oracle)
+- **08-sub-query** : **서브 쿼리 소개**, inline view, `ROWNUM`, **계층형 질의**(oracle)
 - **09-dml** : `SELECT` 절을 제외한 **DML 명령 소개**, `COMMIT`의 필요성
   - 토막 지식 : 테이블 설계, 정규화 과정
 - **10-constraint** : 데이터 타입 리뷰, **제약조건 소개**, `tab` 테이블
 - **11-ddl** : **`CREATE` & `ALTER` & `DROP` & `TRUNCATE` 소개**, 서브쿼리를 통한 `CREATE` & `INSERT`, oracle `recyclebin`, 무결성 체크
+- **12-tcl-view** : **TCL 명령 소개**, **_트랜잭션(transaction)_**, **view**
 
 ## 권장 선수 지식
 
