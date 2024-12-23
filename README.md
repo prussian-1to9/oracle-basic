@@ -22,19 +22,21 @@
 - **03-select** : `NULL` 검색, **`ORDER BY`절** 소개, **집합(set) 연산자**
 - **04-function1** : oracle의 함수 종류, **문자열** 관련 함수, **숫자** 관련 함수
 - **05-function2** : 데이터 **형변환** 함수, **날짜** 관련 함수, **null handling**, **조건** 처리 함수
-- **06-group-by** : `GROUP BY`, `HAVING` 절 소개, **그룹함수**
-- **07-join** : **`JOIN` 소개**, natural join, using join, **ANSI JOIN**
-- **08-sub-query** : **서브 쿼리 소개**, inline view, `ROWNUM`, **계층형 질의**(oracle)
-- **09-dml** : `SELECT` 절을 제외한 **DML 명령 소개**, `COMMIT`의 필요성
+- **06-group-by** : **`GROUP BY`, `HAVING` 절** 소개, **그룹함수**
+- **07-join** : **`JOIN`** 소개, natural join, using join, **ANSI JOIN**
+- **08-sub-query** : **서브 쿼리** 소개, inline view, `ROWNUM`, **계층형 질의**(oracle)
+- **09-dml** : `SELECT` 절을 제외한 **DML 명령** 소개, `COMMIT`의 필요성
   - 토막 지식 : 테이블 설계, 정규화 과정
-- **10-constraint** : 데이터 타입 리뷰, **제약조건 소개**, `tab` 테이블
-- **11-ddl** : **`CREATE` & `ALTER` & `DROP` & `TRUNCATE` 소개**, 서브쿼리를 통한 `CREATE` & `INSERT`, oracle `recyclebin`, 무결성 체크
-- **12-tcl-view** : **TCL 명령 소개**, **_트랜잭션(transaction)_**, **view**
+- **10-constraint** : 데이터 타입 리뷰, **제약조건** 소개, `tab` 테이블
+- **11-ddl** : **`CREATE` & `ALTER` & `DROP` & `TRUNCATE`** 소개, 서브쿼리를 통한 `CREATE` & `INSERT`, oracle `recyclebin`, 무결성 체크
+- **12-tcl-view** : **TCL 명령** 소개, **_트랜잭션(transaction)_**, **view**
+- **13-sequence-index** : **sequence** 소개, `CYCLE`, **index** 소개, index 설정이 **유리/불리한 경우**
 
 ## 권장 선수 지식
 
 - 타 프로그래밍 언어의 stirng 처리, 데이터 타입과 형변환 개념
 - 아스키코드 등 인코딩 관련 지식
+- 자료구조
 
 ---
 

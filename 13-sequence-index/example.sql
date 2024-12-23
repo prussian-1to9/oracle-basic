@@ -38,3 +38,7 @@ SELECT test_seq.NEXTVAL FROM dual; -- 2 (증가)
 
 SELECT test_seq.CURRVAL FROM dual; -- 2 (유지)
 
+/* ========================= [ SEQUENCE ] ========================= */
+-- 회원 테이블의 이름값으로 인덱스 생성 (member.name)
+CREATE INDEX name_idx ON member(name);
+

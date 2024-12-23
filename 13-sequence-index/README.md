@@ -1,5 +1,12 @@
 # 시퀀스(Sequence) & 인덱스(Index)
 
+- 인덱스를 생성/수정/삭제하는 것은 메모리 할당과 schema(테이블)간의 관계에도 통달해야 하기 때문에, 대부분 **고연차의 DBA가 수행**한다.
+- 때문에 해당 토픽에서는 **index를 사용하는 이유, 적절한 사용 방법에 중점**을 둔다.
+- index에 대한 이해는 추후 **쿼리 튜닝을 시도할 경우에도 도움**이 된다.
+  - 해당 레포지토리에서는 다루지 않지만, **적절한 index 사용**과 더불어 쿼리를 설명하는 **`EXPLAIN` 명령어**를 사용해 성능을 높여보는 것을 권장한다.
+
+---
+
 ## 시퀀스 (Sequence)
 
 - PK(기본키)로 사용되는 UID 등의 **일련번호를 자동적으로 발생**시기는 **객체**
@@ -74,3 +81,81 @@ DROP SEQUENCE seq_name;
 - **누락 번호가 생길 가능성**이 있으므로, 시퀀스 사용시에는 사용 범위와 문제 발생 시 해결 방안을 고려해야 한다.
 
 ---
+
+## 색인, 인덱스(Index)
+
+- 검색(`SELECT`) 속도를 증가시키기 위해 만들어진 **`B-Tree` 형태**의 색인(index) **DB 객체**.
+
+> - **index의 자동 생성**
+>   - **`PRIMARY KEY` 또는 `UNIQUE` 제약조건**을 부여할 경우 자동으로 인덱스가 생성된다.
+
+### 경우에 따른 index 사용
+
+- index는 메모리 공간을 소모하기 때문에, 생성에 있어 신중해야 한다.
+- 적절한 index 사용은 **`SELECT` 쿼리 성능 향상**에 큰 도움을 준다.
+
+#### index 생성이 유리한 경우
+
+1. **join에 많이 이용**되는 필드(field)가 있을 때
+2. **`WHERE` 절에 많이 이용**되는 필드(field)가 있을 때
+3. `NULL` 값이 많이 존재하는경우
+
+#### index 생성이 불리한 경우
+
+1. 데이터 양이 너무 적을 때
+   - 오히려 **속도가 저하**될 수 있음
+2. 데이터 입출력이 빈번한 경우
+   - index는 테이블 **데이터와 동기화된 상태를 유지**해야 한다.
+   - 이 경우, **입출력마다 index가 수정**되어 마찬가지로 속도가 저하될 수 있다.
+
+### index 종류
+
+#### 1. 일반 인덱스(Non-unique Index)
+
+- 데이터 중복을 허용하는 기본 인덱스
+
+```sql
+CREATE INDEX idx_name ON tbl_name(col_name)
+```
+
+#### 2. 유일 인덱스(Unique Index)
+
+- 인덱스에 사용되는 데이터가 **_`UNIQUE`하다는 보장이 있는 경우_**에 생성하는 인덱스
+- **이진 검색(binary search)** 사용 : 기본 인덱스보다 **빠른 속도**
+
+```sql
+CREATE UNIQUE INDEX idx_name
+ON tbl_name(col_name);
+```
+
+#### 3. 결합 인덱스
+
+- **여러 필드를 결합**하여 만든 하나의 인덱스
+- **_생성을 위한 전제 조건_**
+  - 사용하는 **필드의 조합이 모두 기본키(`PRIMARY KEY`)**이다.
+
+```sql
+-- 결합 인덱스 일반 생성
+CREATE UNIQUE INDEX idx_name
+ON tbl_name(col1_name, col2_name, ...)
+
+-- 제약조건으로 추가
+CREATE TABLE tbl_name(
+   col_name data_type[(length)]
+      CONSTRAINT constraint_name PRIMARY KEY(col1_name, col2_name, ...)
+)
+```
+
+#### 4. Bitmap Index(비트맵 인덱스)
+
+- 주로 **도메인이 정해져 있는** 경우 사용하는 인덱스
+
+```sql
+CREATE BITMAP INDEX idx_name
+ON tbl_name(col_name);
+```
+
+> - **지정된 도메인**이란?
+>   - **데이터가 지정된 값 중 하나**가 되는 경우
+>   - `'F'`, `'M'`, `'N'`만 입력 가능하도록 `CHECK` 되어있는 `gen` 필드(field)
+>   - `10`, `20`, `30`, `40`만 입력되어있는 `deptno` 필드
