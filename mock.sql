@@ -1,17 +1,27 @@
-CREATE TABLE dept(
+/* ========================= [ mock 데이터 생성 ] ========================= */
+/*
+    해당 스크립트는 모두 system 계정으로 실행 필요
+
+    1. scott 유저 생성
+    2. scott.emp, scott.dept 테이블 생성 및 데이터 입력
+*/
+CREATE USER scott IDENTIFIED BY tiger;
+GRANT CONNECT, RESOURCE TO scott;
+
+CREATE TABLE scott.dept(
     deptno  NUMBER(10)
         CONSTRAINT DEPT_PK PRIMARY KEY,
     dname   VARCHAR2(14),
     loc     VARCHAR2(13) 
 );
 
-INSERT INTO dept (deptno, dname, loc) VALUES
+INSERT INTO scott.dept (deptno, dname, loc) VALUES
 (10, 'ACCOUNTING', 'NEW YORK'),
 (20, 'RESEARCH',   'DALLAS'),
 (30, 'SALES',      'CHICAGO'),
 (40, 'OPERATIONS', 'BOSTON');
 
-CREATE TABLE emp (
+CREATE TABLE scott.emp (
     empno               NUMBER(4) NOT NULL,
     ename               VARCHAR2(10),
     job                 VARCHAR2(9),
@@ -22,7 +32,7 @@ CREATE TABLE emp (
     deptno              NUMBER(2)
 );
 
-INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES
+INSERT INTO scott.emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES
 (7839,  'KING',     'PRESIDENT',    NULL,   TO_DATE('1981-11-17', 'YYYY-MM-DD'),    5000,   NULL,   10),
 (7698,  'BLAKE',    'MANAGER',      7839,   TO_DATE('1981-05-01', 'YYYY-MM-DD'),    2850,   NULL,   30),
 (7782,  'CLARK',    'MANAGER',      7839,   TO_DATE('1981-05-09', 'YYYY-MM-DD'),    2450,   NULL,   10),
