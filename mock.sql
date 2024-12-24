@@ -6,7 +6,7 @@
     2. scott.emp, scott.dept 테이블 생성 및 데이터 입력
 */
 CREATE USER scott IDENTIFIED BY tiger;
-GRANT CONNECT, RESOURCE TO scott;
+GRANT CONNECT, RESOURCE TO scott WITH GRANT OPTION;
 
 CREATE TABLE scott.dept(
     deptno  NUMBER(10)

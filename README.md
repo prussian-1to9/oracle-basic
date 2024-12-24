@@ -33,6 +33,7 @@
 - **11-ddl** : **`CREATE` & `ALTER` & `DROP` & `TRUNCATE`** 소개, 서브쿼리를 통한 `CREATE` & `INSERT`, oracle `recyclebin`, 무결성 체크
 - **12-tcl-view** : **TCL 명령** 소개, **_트랜잭션(transaction)_**, **view**
 - **13-sequence-index** : **sequence** 소개, `CYCLE`, **index** 소개, index 설정이 **유리/불리한 경우**
+- **14-privilege-dcl** : 사용자 관리, **DCL 명령** 소개, **역할(role)**, 동의어(`SYNONYM`)
 
 ## 권장 선수 지식
 
